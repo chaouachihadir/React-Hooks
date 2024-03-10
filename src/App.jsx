@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar/NavBar";
 
 import Filter from "./components/Filter/Filter";
+import { Route, Routes } from "react-router-dom";
+import MovieDetails, { MoviesDetails } from "./components/MovieDetails/MovieDetails";
 
 function App() {
   const [ratingChange, setRatingChange] = useState(1);
@@ -17,7 +19,8 @@ function App() {
       rating: 5,
       description:
         "A chilling story of terror, murder and unknown evil that shocked even experienced real-life paranormal investigators Ed and Lorraine Warren.",
-    },
+      trailer:"https://www.youtube.com/embed/h9Q4zZS2v1k?si=BVy6602KFIgjxlBy" 
+      },
 
     {
       id: Math.random(),
@@ -171,12 +174,31 @@ function App() {
         show={show}
         handleClose={handleClose}
         setShow={setShow}
-      />
-      <Filter
-        ratingChange={ratingChange}
-        SearchInput={SearchInput}
-        movieData={movieData}
-      />
+     />
+     
+       <Routes>
+     
+      <Route 
+      path="/"
+      element={
+        <> 
+      
+          <Filter
+          ratingChange={ratingChange}
+          SearchInput={SearchInput}
+           movieData={movieData}
+          />
+        
+        
+        
+        
+        </>
+       
+      }
+        />
+        <Route path="=/movie-details /:movieId" 
+        element={<MovieDetails movieData={movieData}/>}/>
+      </Routes>
     </>
   );
 }
